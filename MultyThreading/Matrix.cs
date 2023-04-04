@@ -24,9 +24,10 @@ namespace MultyThreading
                 for (int j = 0; j < M; j++)
                 {
                     A[i, j] = rnd.Next(1, 9);
-                    Console.Write("{0}\t", A[i, j]);
+                    //Console.Write("{0}\t", A[i, j]);
+                    
                 }
-                Console.WriteLine();
+                //Console.WriteLine();
             }
         }
         public List<int> SeekMin()
