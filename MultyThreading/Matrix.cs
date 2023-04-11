@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace MultyThreading
 {
@@ -25,29 +24,26 @@ namespace MultyThreading
                 {
                     A[i, j] = rnd.Next(1, 9);
                     //Console.Write("{0}\t", A[i, j]);
-                    
+
                 }
                 //Console.WriteLine();
             }
         }
-        public List<int> SeekMin()
+
+        public IEnumerable<int> GetColumn(int index)
         {
-            List<int> x = new List<int>(M);
-            for (int j = 0; j < M; j++)
+            for (int i = 0; i < M; i++)
             {
-                int minHeight = A[0, j];
-                for (int i = 0; i < N; i++)
-                {
-                    if (A[i, j] < minHeight)
-                    {
-                        minHeight = A[i, j]; 
-                    }
-                }
-                x.Add(minHeight);
-                //Console.WriteLine("столбец {0}, значение: {1}", j, minHeight);
+                yield return A[index, i];
             }
-            return x;
         }
+
+
+        public int SeekMinProdInColumn(int threads) =>
+            ParallelEnumerable.Range(0, N)
+            .WithDegreeOfParallelism(threads)
+            .Select(item => GetColumn(item).AsParallel().WithDegreeOfParallelism(threads).Min())
+            .Aggregate((acc, item) => acc * item);
 
     }
 }
