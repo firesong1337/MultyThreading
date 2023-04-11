@@ -33,3 +33,16 @@ namespace MultyThreading
         }
     }
 }
+//using System;
+//using System.Threading;
+//using System.Linq;
+
+//public static class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        Enumerable.Range(0, 10)
+//            .AsParallel()
+//            .ForAll((int a) => Console.WriteLine($"Привет, из потока { Thread.CurrentThread.ManagedThreadId}"));
+//    }
+//}
